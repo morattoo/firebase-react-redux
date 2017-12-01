@@ -4,6 +4,8 @@ import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import Firebase from 'firebase';
+import store from './store';
+import { Provider } from 'react-redux';
 
 /* Firebase Initialize */
 var config = {
@@ -18,5 +20,8 @@ var config = {
 Firebase.initializeApp(config);
 
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<Provider store={store}>
+                  <App />
+                </Provider>, document.getElementById('root'));
+        
 registerServiceWorker();

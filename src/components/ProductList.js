@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Glyphicon } from 'react-bootstrap';
 import store from '../store';
+import { addToCart } from '../ActionCreator';
 
 const styles = {
   products: {
@@ -18,8 +19,8 @@ const styles = {
 class ProductList extends Component {
   constructor() {
     super();
-    this.addToCart = this.addToCart.bind(this);
-
+    this.addProductToCart = this.addProductToCart.bind(this);
+    
     this.state = {
       products: [
         { id: 1, name: "Hipster Ultimate", price: 299, image: "https://s3.amazonaws.com/makeitreal/projects/e-commerce/camiseta-1.jpg" },
@@ -38,7 +39,7 @@ class ProductList extends Component {
             <div className="caption">
               <h4>{product.name}</h4>
               <p>
-                <Button bsStyle="primary" onClick={() => this.addToCart(product)} role="button" disabled={product.inventory <= 0}>${product.price} <Glyphicon glyph="shopping-cart" /></Button>
+                <Button bsStyle="primary" onClick={() => this.addProductToCart(product)} role="button" disabled={product.inventory <= 0}>${product.price} <Glyphicon glyph="shopping-cart" /></Button>
               </p>
             </div>
           </div>
@@ -47,12 +48,10 @@ class ProductList extends Component {
     );
   }
 
-  addToCart(product) {
-    store.dispatch({
-      type: "ADD_TO_CART",
-      product: product
-    });
+  addProductToCart(product) {
+    store.dispatch(addToCart(product));
   }
+
 }
 
 export default ProductList;
