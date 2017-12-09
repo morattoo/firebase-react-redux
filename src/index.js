@@ -6,6 +6,9 @@ import registerServiceWorker from './registerServiceWorker';
 import Firebase from 'firebase';
 import store from './store';
 import { Provider } from 'react-redux';
+import { loadProducts } from './ActionCreator';
+
+store.dispatch(loadProducts());
 
 /* Firebase Initialize */
 var config = {

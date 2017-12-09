@@ -1,5 +1,15 @@
-const loadProducts = function(){
-    
+import axios from 'axios';
+
+const loadProducts = function() {
+    return dispache => {
+        return axios.get('http://localhost:3001/products')
+            .then(response => {
+                dispache({
+                    type: "REPLACE_PRODUCTS",
+                    products: response.data
+                })
+            });
+    }
 }
 
 
@@ -17,4 +27,4 @@ const removeToCart = function(product) {
       }
 }
 
-export {addToCart, removeToCart}
+export {addToCart, removeToCart, loadProducts}
